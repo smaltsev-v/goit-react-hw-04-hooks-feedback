@@ -3,31 +3,25 @@ import PropTypes from "prop-types";
 import s from './Control.module.css';
 
 
-const ControlOptions = ({ options, onLeaveFeedback }) => {
-  const btnNames = Object.keys(options);
-  return (
-    <ul className={s.list} >
-      {btnNames.map((btnName) => (
-        <li key={btnName}>
-          <button
-            className={s.FeedbackOption_button}
-            name={btnName}
-            onClick={onLeaveFeedback}
-          >
-            {btnName}
-          </button>
-        </li>
-      ))}
-    </ul>
-  );
-};
+function  ControlOptions ({ options, onLeaveFeedback }) {
+  return options.map(option => (
+    <button
+      type="button"
+      className={s.FeedbackOption_button}
+      key={option}
+      onClick={() => onLeaveFeedback(option)}
+    >
+      {option}
+    </button>
+
+  ));
+}
 
 
+ControlOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string.isRequired),
 
-ControlOptions.propTypes  = {
-    options: PropTypes.objectOf(PropTypes.number.isRequired).isRequired,
-    onLeaveFeedback: PropTypes.func.isRequired,
-
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
 
 
